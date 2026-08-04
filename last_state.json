@@ -1,5 +1,5 @@
 {
-  "pageStatus": "HASISSUES",
+  "pageStatus": "UP",
   "components": [
     {
       "id": "cljg8dtbs161994brocgclobbt4",
@@ -22,7 +22,7 @@
     {
       "id": "cljg99p53207029broc36bdpn0h",
       "name": "Trading API (CLOB)",
-      "status": "DEGRADEDPERFORMANCE",
+      "status": "OPERATIONAL",
       "group": "Predictions"
     },
     {
@@ -68,14 +68,7 @@
       "group": "Perpetuals"
     }
   ],
-  "incidents": [
-    {
-      "id": "cmses66b80c3l0kmrqz70m6fz",
-      "name": "Sports-combo trading",
-      "status": "INVESTIGATING",
-      "started": "2026-08-04T14:55:59.005Z"
-    }
-  ],
+  "incidents": [],
   "maintenances": [],
-  "lastChecked": "2026-08-04T15:05:33.555Z"
+  "lastChecked": "2026-08-04T16:14:57.602Z"
 }
