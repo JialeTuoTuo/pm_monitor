@@ -1,0 +1,56 @@
+{
+  "_comment": "Component id → impact description. Names mirror https://status.polymarket.com (v3/components.json). Descriptions derived from official component titles on the status page plus Polymarket public API docs (CLOB / RTDS).",
+  "byId": {
+    "cljg8dtbs161994brocgclobbt4": {
+      "name": "Polymarket Web app",
+      "impact": "影响：官网/App 页面访问与交互（浏览市场、账户入口等前端体验）"
+    },
+    "clm853jj2434499boon4yu1v2iu": {
+      "name": "Account Access & Authentication",
+      "impact": "影响：登录、注册、钱包/账户鉴权与会话相关能力"
+    },
+    "cms5ckv1f0ean0sn2oe0257hx": {
+      "name": "Predictions",
+      "impact": "影响：预测市场（Predictions）整组服务可用性（其下含交易、行情、持仓、链上结算等子组件）"
+    },
+    "cljg99p53207029broc36bdpn0h": {
+      "name": "Trading API (CLOB)",
+      "group": "Predictions",
+      "impact": "影响：下单、撮合、订单簿与订单管理（CLOB Trading API）"
+    },
+    "cm6ryj3gg00525z6v8hf8t7dd": {
+      "name": "Websocket (RTDS)",
+      "group": "Predictions",
+      "impact": "影响：实时数据推送（RTDS/行情与实时更新流）"
+    },
+    "cljg8dtcr162024brocebkcahss": {
+      "name": "Markets and Position data",
+      "group": "Predictions",
+      "impact": "影响：市场元数据、价格/盘口查询与持仓等数据读取"
+    },
+    "cljg95w91202088brocvel7x8vt": {
+      "name": "On-chain settlement (Polygon RPC)",
+      "group": "Predictions",
+      "impact": "影响：Polygon 链上结算与相关 RPC/交易上链确认"
+    },
+    "cms5co3kk0fz90kqqliko9sru": {
+      "name": "Perpetuals",
+      "impact": "影响：永续合约（Perpetuals）整组服务可用性"
+    },
+    "cms5cp7240fp50zqq8n29aruo": {
+      "name": "Perpetuals trading",
+      "group": "Perpetuals",
+      "impact": "影响：永续合约下单、成交与交易执行"
+    },
+    "cms5cpgbd0emv0zlrbpmy9hme": {
+      "name": "Perpetuals API",
+      "group": "Perpetuals",
+      "impact": "影响：永续合约相关 API 调用（程序化接入/查询与交易接口）"
+    },
+    "cms5cpsz30eep0klrj1bnufnm": {
+      "name": "Perpetuals market data",
+      "group": "Perpetuals",
+      "impact": "影响：永续合约行情与市场数据展示/订阅"
+    }
+  }
+}

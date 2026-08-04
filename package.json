@@ -1,0 +1,17 @@
+{
+  "name": "polymarket-status-bot",
+  "version": "1.0.0",
+  "description": "Poll Polymarket status page and push updates to Telegram",
+  "type": "module",
+  "main": "check-status.js",
+  "scripts": {
+    "check": "node check-status.js",
+    "start": "node check-status.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  }
+}

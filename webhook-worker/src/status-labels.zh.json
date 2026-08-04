@@ -1,0 +1,21 @@
+{
+  "_comment": "Instatus API status enums → Chinese labels for Telegram. Keys are normalized (uppercase, underscores removed).",
+  "labels": {
+    "UP": "全部正常",
+    "HASISSUES": "存在故障",
+    "UNDERMAINTENANCE": "维护中",
+    "OPERATIONAL": "已恢复正常",
+    "DEGRADEDPERFORMANCE": "性能下降",
+    "PARTIALOUTAGE": "部分中断",
+    "MAJOROUTAGE": "严重中断",
+    "MINOROUTAGE": "轻微中断",
+    "INVESTIGATING": "调查中",
+    "IDENTIFIED": "已定位问题",
+    "MONITORING": "观察中",
+    "RESOLVED": "已恢复",
+    "NOTSTARTEDYET": "未开始",
+    "INPROGRESS": "进行中",
+    "COMPLETED": "已完成",
+    "VERIFYING": "验证中"
+  }
+}

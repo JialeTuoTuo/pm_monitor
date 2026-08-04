@@ -1,0 +1,81 @@
+{
+  "pageStatus": "HASISSUES",
+  "components": [
+    {
+      "id": "cljg8dtbs161994brocgclobbt4",
+      "name": "Polymarket Web app",
+      "status": "OPERATIONAL",
+      "group": null
+    },
+    {
+      "id": "clm853jj2434499boon4yu1v2iu",
+      "name": "Account Access & Authentication",
+      "status": "OPERATIONAL",
+      "group": null
+    },
+    {
+      "id": "cms5ckv1f0ean0sn2oe0257hx",
+      "name": "Predictions",
+      "status": "OPERATIONAL",
+      "group": null
+    },
+    {
+      "id": "cljg99p53207029broc36bdpn0h",
+      "name": "Trading API (CLOB)",
+      "status": "DEGRADEDPERFORMANCE",
+      "group": "Predictions"
+    },
+    {
+      "id": "cm6ryj3gg00525z6v8hf8t7dd",
+      "name": "Websocket (RTDS)",
+      "status": "OPERATIONAL",
+      "group": "Predictions"
+    },
+    {
+      "id": "cljg8dtcr162024brocebkcahss",
+      "name": "Markets and Position data",
+      "status": "OPERATIONAL",
+      "group": "Predictions"
+    },
+    {
+      "id": "cljg95w91202088brocvel7x8vt",
+      "name": "On-chain settlement (Polygon RPC)",
+      "status": "OPERATIONAL",
+      "group": "Predictions"
+    },
+    {
+      "id": "cms5co3kk0fz90kqqliko9sru",
+      "name": "Perpetuals",
+      "status": "OPERATIONAL",
+      "group": null
+    },
+    {
+      "id": "cms5cp7240fp50zqq8n29aruo",
+      "name": "Perpetuals trading",
+      "status": "OPERATIONAL",
+      "group": "Perpetuals"
+    },
+    {
+      "id": "cms5cpgbd0emv0zlrbpmy9hme",
+      "name": "Perpetuals API",
+      "status": "OPERATIONAL",
+      "group": "Perpetuals"
+    },
+    {
+      "id": "cms5cpsz30eep0klrj1bnufnm",
+      "name": "Perpetuals market data",
+      "status": "OPERATIONAL",
+      "group": "Perpetuals"
+    }
+  ],
+  "incidents": [
+    {
+      "id": "cmses66b80c3l0kmrqz70m6fz",
+      "name": "Sports-combo trading",
+      "status": "INVESTIGATING",
+      "started": "2026-08-04T14:55:59.005Z"
+    }
+  ],
+  "maintenances": [],
+  "lastChecked": "2026-08-04T15:05:33.555Z"
+}

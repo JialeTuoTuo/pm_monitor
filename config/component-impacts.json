@@ -1,0 +1,89 @@
+{
+  "_comment": "Component id → bilingual human copy. zh for Dev TG; en for ops paste reference. Names mirror status.polymarket.com.",
+  "byId": {
+    "cljg8dtbs161994brocgclobbt4": {
+      "name": "Polymarket Web app",
+      "labelZh": "官网/App",
+      "labelEn": "website/app",
+      "impact": "影响：官网/App 页面访问与交互（浏览市场、账户入口等前端体验）",
+      "impactEn": "browsing markets and account entry on the website/app"
+    },
+    "clm853jj2434499boon4yu1v2iu": {
+      "name": "Account Access & Authentication",
+      "labelZh": "登录与鉴权",
+      "labelEn": "login & authentication",
+      "impact": "影响：登录、注册、钱包/账户鉴权与会话相关能力",
+      "impactEn": "login, signup, and wallet/account auth"
+    },
+    "cms5ckv1f0ean0sn2oe0257hx": {
+      "name": "Predictions",
+      "labelZh": "预测市场服务",
+      "labelEn": "prediction markets",
+      "impact": "影响：预测市场（Predictions）整组服务可用性（其下含交易、行情、持仓、链上结算等子组件）",
+      "impactEn": "prediction markets (trading, data, positions, settlement)"
+    },
+    "cljg99p53207029broc36bdpn0h": {
+      "name": "Trading API (CLOB)",
+      "group": "Predictions",
+      "labelZh": "交易/撮合（CLOB）",
+      "labelEn": "trading / order matching (CLOB)",
+      "impact": "影响：下单、撮合、订单簿与订单管理（CLOB Trading API）",
+      "impactEn": "placing orders, matching, and order books"
+    },
+    "cm6ryj3gg00525z6v8hf8t7dd": {
+      "name": "Websocket (RTDS)",
+      "group": "Predictions",
+      "labelZh": "实时行情推送",
+      "labelEn": "real-time data feed",
+      "impact": "影响：实时数据推送（RTDS/行情与实时更新流）",
+      "impactEn": "live prices and realtime updates"
+    },
+    "cljg8dtcr162024brocebkcahss": {
+      "name": "Markets and Position data",
+      "group": "Predictions",
+      "labelZh": "市场与持仓数据",
+      "labelEn": "market & position data",
+      "impact": "影响：市场元数据、价格/盘口查询与持仓等数据读取",
+      "impactEn": "market metadata, prices, and positions"
+    },
+    "cljg95w91202088brocvel7x8vt": {
+      "name": "On-chain settlement (Polygon RPC)",
+      "group": "Predictions",
+      "labelZh": "链上结算",
+      "labelEn": "on-chain settlement",
+      "impact": "影响：Polygon 链上结算与相关 RPC/交易上链确认",
+      "impactEn": "Polygon settlement and on-chain confirmations"
+    },
+    "cms5co3kk0fz90kqqliko9sru": {
+      "name": "Perpetuals",
+      "labelZh": "永续合约服务",
+      "labelEn": "perpetuals",
+      "impact": "影响：永续合约（Perpetuals）整组服务可用性",
+      "impactEn": "perpetuals services overall"
+    },
+    "cms5cp7240fp50zqq8n29aruo": {
+      "name": "Perpetuals trading",
+      "group": "Perpetuals",
+      "labelZh": "永续合约交易",
+      "labelEn": "perpetuals trading",
+      "impact": "影响：永续合约下单、成交与交易执行",
+      "impactEn": "perpetuals order execution"
+    },
+    "cms5cpgbd0emv0zlrbpmy9hme": {
+      "name": "Perpetuals API",
+      "group": "Perpetuals",
+      "labelZh": "永续合约 API",
+      "labelEn": "perpetuals API",
+      "impact": "影响：永续合约相关 API 调用（程序化接入/查询与交易接口）",
+      "impactEn": "perpetuals API access"
+    },
+    "cms5cpsz30eep0klrj1bnufnm": {
+      "name": "Perpetuals market data",
+      "group": "Perpetuals",
+      "labelZh": "永续合约行情",
+      "labelEn": "perpetuals market data",
+      "impact": "影响：永续合约行情与市场数据展示/订阅",
+      "impactEn": "perpetuals market data and quotes"
+    }
+  }
+}

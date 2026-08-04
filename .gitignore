@@ -1,0 +1,7 @@
+node_modules/
+.env
+.DS_Store
+*.log
+.live-*.json
+webhook-worker/node_modules/
+webhook-worker/.wrangler/
