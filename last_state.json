@@ -69,6 +69,12 @@
     }
   ],
   "incidents": [],
-  "maintenances": [],
-  "lastChecked": "2026-08-04T22:07:05.514Z"
+  "maintenances": [
+    {
+      "id": "cmsf92ll001yh0kmkv4m05ee4",
+      "name": "Scheduled Maintenance - Trading",
+      "status": "NOTSTARTEDYET"
+    }
+  ],
+  "lastChecked": "2026-08-04T23:14:56.882Z"
 }
