@@ -112,3 +112,36 @@ export function incidentOpsScenario(statusKey, { isNew = false, isResolved = fal
   if (s === "INVESTIGATING" || isNew) return "new_incident";
   return isNew ? "new_incident" : "investigating";
 }
+
+/** Beijing wall-clock HH:mm for maintenance window hints */
+export function formatBeijingHm(dateLike) {
+  if (!dateLike) return null;
+  const d = new Date(dateLike);
+  if (Number.isNaN(d.getTime())) return null;
+  const bj = new Date(d.getTime() + 8 * 60 * 60 * 1000);
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${pad(bj.getUTCHours())}:${pad(bj.getUTCMinutes())}`;
+}
+
+export function maintenanceBeijingWindow(maintenance) {
+  const startHm = formatBeijingHm(maintenance?.start || maintenance?.created_at);
+  if (!startHm) return null;
+  const durationMin = Number(maintenance?.duration);
+  if (!Number.isFinite(durationMin) || durationMin <= 0) {
+    return `北京时间 ${startHm}`;
+  }
+  const start = new Date(maintenance.start || maintenance.created_at);
+  const endHm = formatBeijingHm(new Date(start.getTime() + durationMin * 60_000));
+  return endHm ? `北京时间 ${startHm}-${endHm}` : `北京时间 ${startHm}`;
+}
+
+/** Map maintenance API status → ops English scenario */
+export function maintenanceOpsScenario(statusKey, { isNew = false, isGone = false } = {}) {
+  if (isGone) return "maintenance_done";
+  const s = String(statusKey || "").toUpperCase().replace(/[_-\s]/g, "");
+  if (s === "COMPLETED") return "maintenance_done";
+  if (isNew || s === "NOTSTARTEDYET" || s === "INPROGRESS" || s === "VERIFYING") {
+    return "maintenance";
+  }
+  return "maintenance";
+}

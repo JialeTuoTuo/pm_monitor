@@ -17,6 +17,8 @@ import {
   withOpsReference,
   componentOpsScenario,
   incidentOpsScenario,
+  maintenanceOpsScenario,
+  maintenanceBeijingWindow,
   durationMinsFromStart,
 } from "./config/ops-copy.js";
 
@@ -177,6 +179,8 @@ async function fetchCurrentStatus() {
     id: m.id || m.url || `${m.name}-${m.start}`,
     name: String(m.name || "Untitled maintenance").trim(),
     status: m.status || "UNKNOWN",
+    start: m.start || null,
+    duration: m.duration ?? null,
     url: m.url || null,
   }));
 
@@ -256,7 +260,16 @@ function normalizeState(raw) {
     pageStatus: raw.pageStatus || "UNKNOWN",
     components,
     incidents,
-    maintenances: Array.isArray(raw.maintenances) ? raw.maintenances : [],
+    maintenances: Array.isArray(raw.maintenances)
+      ? raw.maintenances.map((m) => ({
+          id: m.id,
+          name: String(m.name || m.id || "").trim(),
+          status: m.status || "UNKNOWN",
+          start: m.start || null,
+          duration: m.duration ?? null,
+          url: m.url || null,
+        }))
+      : [],
     lastChecked: raw.lastChecked || raw.updatedAt || null,
   };
 }
@@ -280,6 +293,9 @@ function saveState(current) {
       id: m.id,
       name: m.name,
       status: m.status,
+      start: m.start || null,
+      duration: m.duration ?? null,
+      url: m.url || null,
     })),
     lastChecked: current.lastChecked,
   };
@@ -359,6 +375,88 @@ function diff(prev, current) {
             labelEn: meta.labelEn,
             impactEn: meta.impactEn,
             durationMins: durationMinsFromStart(old.started),
+          })
+        )
+      );
+    }
+  }
+
+  // --- Maintenances (activeMaintenances from summary) ---
+  const prevMaintenancesById = new Map(
+    (prev.maintenances || []).map((m) => [m.id, m])
+  );
+  const currentMaintenanceIds = new Set(current.maintenances.map((m) => m.id));
+
+  for (const m of current.maintenances) {
+    const old = prevMaintenancesById.get(m.id);
+    const subject = m.name || "维护";
+    const meta = getComponentMeta(null, subject);
+    const window = maintenanceBeijingWindow(m);
+    if (!old) {
+      const scenario = maintenanceOpsScenario(m.status, { isNew: true });
+      const zh = [
+        `🛠️ 计划维护 | Polymarket ${subject}`,
+        `状态：${label(m.status)}`,
+        window ? `窗口：${window}` : null,
+        `时间：${when}`,
+        `🔗 ${m.url || pageUrl}`,
+      ]
+        .filter(Boolean)
+        .join("\n");
+      messages.push(
+        withOpsReference(
+          zh,
+          buildOpsEnglish(scenario, {
+            labelEn: meta.labelEn,
+            impactEn: meta.impactEn,
+            beijingWindow: window,
+          })
+        )
+      );
+    } else if (old.status !== m.status) {
+      const scenario = maintenanceOpsScenario(m.status);
+      const title =
+        normalizeStatusKey(m.status) === "COMPLETED"
+          ? `✅ 维护完成 | Polymarket ${subject}`
+          : `🛠️ 维护更新 | Polymarket ${subject}`;
+      const zh = [
+        title,
+        `${label(old.status)} → ${label(m.status)}`,
+        window ? `窗口：${window}` : null,
+        `时间：${when}`,
+        `🔗 ${m.url || pageUrl}`,
+      ]
+        .filter(Boolean)
+        .join("\n");
+      messages.push(
+        withOpsReference(
+          zh,
+          buildOpsEnglish(scenario, {
+            labelEn: meta.labelEn,
+            impactEn: meta.impactEn,
+            beijingWindow: window,
+          })
+        )
+      );
+    }
+  }
+
+  for (const [id, old] of prevMaintenancesById) {
+    if (!currentMaintenanceIds.has(id)) {
+      const subject = old.name || id;
+      const meta = getComponentMeta(null, subject);
+      const zh = [
+        `✅ 维护完成 | Polymarket ${subject}`,
+        `状态：${label("COMPLETED")}`,
+        `时间：${when}`,
+        `🔗 ${old.url || pageUrl}`,
+      ].join("\n");
+      messages.push(
+        withOpsReference(
+          zh,
+          buildOpsEnglish("maintenance_done", {
+            labelEn: meta.labelEn,
+            impactEn: meta.impactEn,
           })
         )
       );
