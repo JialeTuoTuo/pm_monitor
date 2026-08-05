@@ -1,5 +1,5 @@
 {
-  "pageStatus": "HASISSUES",
+  "pageStatus": "UP",
   "components": [
     {
       "id": "cljg8dtbs161994brocgclobbt4",
@@ -70,18 +70,11 @@
     {
       "id": "cmsg6dlyz036d0zjsh6ob2a4b",
       "name": "Clob Websocket",
-      "status": "DEGRADEDPERFORMANCE",
+      "status": "OPERATIONAL",
       "group": "Predictions"
     }
   ],
-  "incidents": [
-    {
-      "id": "cmsg6bnai002g0roae90viwmx",
-      "name": "Issue with websocket subscriptions on user and markets channel",
-      "status": "INVESTIGATING",
-      "started": "2026-08-05T14:19:54.768Z"
-    }
-  ],
+  "incidents": [],
   "maintenances": [],
-  "lastChecked": "2026-08-05T15:16:06.098Z"
+  "lastChecked": "2026-08-05T16:53:51.286Z"
 }
