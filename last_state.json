@@ -69,6 +69,15 @@
     }
   ],
   "incidents": [],
-  "maintenances": [],
-  "lastChecked": "2026-08-05T03:33:18.784Z"
+  "maintenances": [
+    {
+      "id": "cmsf92ll001yh0kmkv4m05ee4",
+      "name": "Scheduled Maintenance - Trading",
+      "status": "NOTSTARTEDYET",
+      "start": "2026-08-05T04:30:00.000Z",
+      "duration": 30,
+      "url": "https://status.polymarket.com/cmsf92ll001yh0kmkv4m05ee4"
+    }
+  ],
+  "lastChecked": "2026-08-05T04:22:29.706Z"
 }
