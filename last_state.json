@@ -14,32 +14,14 @@
       "group": null
     },
     {
-      "id": "cljg99p53207029broc36bdpn0h",
-      "name": "Trading API (CLOB)",
-      "status": "OPERATIONAL",
-      "group": "Predictions"
-    },
-    {
       "id": "cms5ckv1f0ean0sn2oe0257hx",
       "name": "Predictions",
       "status": "OPERATIONAL",
       "group": null
     },
     {
-      "id": "cm6ryj3gg00525z6v8hf8t7dd",
-      "name": "Websocket (RTDS)",
-      "status": "OPERATIONAL",
-      "group": "Predictions"
-    },
-    {
-      "id": "cljg8dtcr162024brocebkcahss",
-      "name": "Markets and Position data",
-      "status": "OPERATIONAL",
-      "group": "Predictions"
-    },
-    {
-      "id": "cljg95w91202088brocvel7x8vt",
-      "name": "On-chain settlement (Polygon RPC)",
+      "id": "cljg99p53207029broc36bdpn0h",
+      "name": "Trading API (CLOB)",
       "status": "OPERATIONAL",
       "group": "Predictions"
     },
@@ -50,14 +32,14 @@
       "group": null
     },
     {
-      "id": "cms5cp7240fp50zqq8n29aruo",
-      "name": "Perpetuals trading",
+      "id": "cm6ryj3gg00525z6v8hf8t7dd",
+      "name": "Websocket (RTDS)",
       "status": "OPERATIONAL",
-      "group": "Perpetuals"
+      "group": "Predictions"
     },
     {
-      "id": "cms5cpgbd0emv0zlrbpmy9hme",
-      "name": "Perpetuals API",
+      "id": "cms5cp7240fp50zqq8n29aruo",
+      "name": "Perpetuals trading",
       "status": "OPERATIONAL",
       "group": "Perpetuals"
     },
@@ -68,13 +50,31 @@
       "group": "Perpetuals"
     },
     {
+      "id": "cljg8dtcr162024brocebkcahss",
+      "name": "Markets and Position data",
+      "status": "OPERATIONAL",
+      "group": "Predictions"
+    },
+    {
+      "id": "cms5cpgbd0emv0zlrbpmy9hme",
+      "name": "Perpetuals API",
+      "status": "OPERATIONAL",
+      "group": "Perpetuals"
+    },
+    {
       "id": "cmsg6dlyz036d0zjsh6ob2a4b",
       "name": "Clob Websocket",
+      "status": "OPERATIONAL",
+      "group": "Predictions"
+    },
+    {
+      "id": "cljg95w91202088brocvel7x8vt",
+      "name": "On-chain settlement (Polygon RPC)",
       "status": "OPERATIONAL",
       "group": "Predictions"
     }
   ],
   "incidents": [],
   "maintenances": [],
-  "lastChecked": "2026-08-06T07:23:49.874Z"
+  "lastChecked": "2026-08-06T10:04:42.161Z"
 }
