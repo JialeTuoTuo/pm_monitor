@@ -75,6 +75,15 @@
     }
   ],
   "incidents": [],
-  "maintenances": [],
-  "lastChecked": "2026-08-07T17:03:51.041Z"
+  "maintenances": [
+    {
+      "id": "cmsj7oohm0ezb0kpqdtt9u9y6",
+      "name": "Scheduled  maintenance for CLOB",
+      "status": "NOTSTARTEDYET",
+      "start": "2026-08-07T22:02:00.000Z",
+      "duration": 15,
+      "url": "https://status.polymarket.com/cmsj7oohm0ezb0kpqdtt9u9y6"
+    }
+  ],
+  "lastChecked": "2026-08-07T17:54:44.023Z"
 }
