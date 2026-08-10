@@ -18,7 +18,7 @@ import {
   componentOpsScenario,
   incidentOpsScenario,
   maintenanceOpsScenario,
-  maintenanceBeijingWindow,
+  maintenanceUtcWindow,
   durationMinsFromStart,
 } from "./config/ops-copy.js";
 
@@ -391,7 +391,7 @@ function diff(prev, current) {
     const old = prevMaintenancesById.get(m.id);
     const subject = m.name || "维护";
     const meta = getComponentMeta(null, subject);
-    const window = maintenanceBeijingWindow(m);
+    const window = maintenanceUtcWindow(m);
     if (!old) {
       const scenario = maintenanceOpsScenario(m.status, { isNew: true });
       const zh = [
@@ -409,7 +409,7 @@ function diff(prev, current) {
           buildOpsEnglish(scenario, {
             labelEn: meta.labelEn,
             impactEn: meta.impactEn,
-            beijingWindow: window,
+            utcWindow: window,
           })
         )
       );
@@ -434,7 +434,7 @@ function diff(prev, current) {
           buildOpsEnglish(scenario, {
             labelEn: meta.labelEn,
             impactEn: meta.impactEn,
-            beijingWindow: window,
+            utcWindow: window,
           })
         )
       );

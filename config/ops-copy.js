@@ -48,7 +48,7 @@ export function durationMinsFromStart(startedAt) {
 
 /**
  * @param {'new_incident'|'investigating'|'resolved'|'degraded'|'maintenance'|'maintenance_done'} scenario
- * @param {{ labelEn: string, impactEn?: string, durationMins?: number|null, beijingWindow?: string|null }} opts
+ * @param {{ labelEn: string, impactEn?: string, durationMins?: number|null, utcWindow?: string|null }} opts
  */
 /** Strip redundant "Scheduled maintenance for/on …" so ops English stays short. */
 function normalizeMaintenanceSubjectEn(labelEn) {
@@ -75,7 +75,7 @@ export function buildOpsEnglish(scenario, opts) {
       return `⚠️ Polymarket: ${labelEn} running slow.${impactBit} No action needed, may resolve shortly.`;
     case "maintenance": {
       const subject = normalizeMaintenanceSubjectEn(labelEn);
-      const window = (opts.beijingWindow || "").trim() || "TBD";
+      const window = (opts.utcWindow || opts.beijingWindow || "").trim() || "TBD";
       const affect = (opts.impactEn || "").trim() || "related features";
       return `🔧 Polymarket: scheduled maintenance on ${subject}, ${window}. May affect ${affect} during this window.`;
     }
@@ -121,28 +121,30 @@ export function incidentOpsScenario(statusKey, { isNew = false, isResolved = fal
   return isNew ? "new_incident" : "investigating";
 }
 
-/** Beijing wall-clock HH:mm for maintenance window hints */
-export function formatBeijingHm(dateLike) {
+/** UTC wall-clock HH:mm for maintenance window hints (ops English only). */
+export function formatUtcHm(dateLike) {
   if (!dateLike) return null;
   const d = new Date(dateLike);
   if (Number.isNaN(d.getTime())) return null;
-  const bj = new Date(d.getTime() + 8 * 60 * 60 * 1000);
   const pad = (n) => String(n).padStart(2, "0");
-  return `${pad(bj.getUTCHours())}:${pad(bj.getUTCMinutes())}`;
+  return `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`;
 }
 
-export function maintenanceBeijingWindow(maintenance) {
-  const startHm = formatBeijingHm(maintenance?.start || maintenance?.created_at);
+export function maintenanceUtcWindow(maintenance) {
+  const startHm = formatUtcHm(maintenance?.start || maintenance?.created_at);
   if (!startHm) return null;
   const durationMin = Number(maintenance?.duration);
   if (!Number.isFinite(durationMin) || durationMin <= 0) {
-    return `Beijing time ${startHm}`;
+    return `${startHm} UTC`;
   }
   const start = new Date(maintenance.start || maintenance.created_at);
-  const endHm = formatBeijingHm(new Date(start.getTime() + durationMin * 60_000));
-  return endHm
-    ? `Beijing time ${startHm}-${endHm}`
-    : `Beijing time ${startHm}`;
+  const endHm = formatUtcHm(new Date(start.getTime() + durationMin * 60_000));
+  return endHm ? `${startHm}-${endHm} UTC` : `${startHm} UTC`;
+}
+
+/** @deprecated use maintenanceUtcWindow — kept so older imports keep working */
+export function maintenanceBeijingWindow(maintenance) {
+  return maintenanceUtcWindow(maintenance);
 }
 
 /** Map maintenance API status → ops English scenario */

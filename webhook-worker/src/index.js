@@ -15,7 +15,7 @@ import {
   componentOpsScenario,
   incidentOpsScenario,
   durationMinsFromStart,
-  maintenanceBeijingWindow,
+  maintenanceUtcWindow,
 } from "./ops-copy.js";
 
 const STATUS_PAGE_URL = "https://status.polymarket.com";
@@ -206,7 +206,7 @@ function buildMessages(payload) {
         buildOpsEnglish(scenario, {
           labelEn: meta.labelEn,
           impactEn: meta.impactEn,
-          beijingWindow: maintenanceBeijingWindow({
+          utcWindow: maintenanceUtcWindow({
             start: update.created_at,
             duration: null,
           }),
@@ -221,7 +221,7 @@ function buildMessages(payload) {
     const status = normalizeStatusKey(m.status);
     const link = m.url || pageUrl;
     const meta = getComponentMeta(null, subject);
-    const window = maintenanceBeijingWindow(m);
+    const window = maintenanceUtcWindow(m);
 
     if (status === "COMPLETED") {
       const zh = [
@@ -253,7 +253,7 @@ function buildMessages(payload) {
           buildOpsEnglish("maintenance", {
             labelEn: meta.labelEn,
             impactEn: meta.impactEn,
-            beijingWindow: window,
+            utcWindow: window,
           })
         )
       );
