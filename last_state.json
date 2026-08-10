@@ -1,5 +1,5 @@
 {
-  "pageStatus": "UP",
+  "pageStatus": "HASISSUES",
   "components": [
     {
       "id": "cljg8dtbs161994brocgclobbt4",
@@ -40,13 +40,13 @@
     {
       "id": "cms5cp7240fp50zqq8n29aruo",
       "name": "Perpetuals trading",
-      "status": "OPERATIONAL",
+      "status": "MAJOROUTAGE",
       "group": "Perpetuals"
     },
     {
-      "id": "cms5cpsz30eep0klrj1bnufnm",
-      "name": "Perpetuals market data",
-      "status": "OPERATIONAL",
+      "id": "cms5cpgbd0emv0zlrbpmy9hme",
+      "name": "Perpetuals API",
+      "status": "MAJOROUTAGE",
       "group": "Perpetuals"
     },
     {
@@ -56,8 +56,8 @@
       "group": "Predictions"
     },
     {
-      "id": "cms5cpgbd0emv0zlrbpmy9hme",
-      "name": "Perpetuals API",
+      "id": "cms5cpsz30eep0klrj1bnufnm",
+      "name": "Perpetuals market data",
       "status": "OPERATIONAL",
       "group": "Perpetuals"
     },
@@ -74,7 +74,14 @@
       "group": "Predictions"
     }
   ],
-  "incidents": [],
+  "incidents": [
+    {
+      "id": "cmsn29mrk17gz0kn31kbqkz3x",
+      "name": "Issue with Perps Trading Engine",
+      "status": "INVESTIGATING",
+      "started": "2026-08-10T10:00:45.800Z"
+    }
+  ],
   "maintenances": [],
-  "lastChecked": "2026-08-10T09:52:16.929Z"
+  "lastChecked": "2026-08-10T10:51:49.763Z"
 }
