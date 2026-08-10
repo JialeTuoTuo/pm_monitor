@@ -50,6 +50,13 @@ export function durationMinsFromStart(startedAt) {
  * @param {'new_incident'|'investigating'|'resolved'|'degraded'|'maintenance'|'maintenance_done'} scenario
  * @param {{ labelEn: string, impactEn?: string, durationMins?: number|null, beijingWindow?: string|null }} opts
  */
+/** Strip redundant "Scheduled maintenance for/on …" so ops English stays short. */
+function normalizeMaintenanceSubjectEn(labelEn) {
+  const s = (labelEn || "service").trim();
+  const stripped = s.replace(/^scheduled\s+maintenance\s+(for|on)\s+/i, "").trim();
+  return stripped || s || "service";
+}
+
 export function buildOpsEnglish(scenario, opts) {
   const labelEn = (opts.labelEn || "service").trim();
   const impactBit = optionalImpactEn(opts.impactEn);
@@ -67,12 +74,13 @@ export function buildOpsEnglish(scenario, opts) {
     case "degraded":
       return `⚠️ Polymarket: ${labelEn} running slow.${impactBit} No action needed, may resolve shortly.`;
     case "maintenance": {
+      const subject = normalizeMaintenanceSubjectEn(labelEn);
       const window = (opts.beijingWindow || "").trim() || "TBD";
       const affect = (opts.impactEn || "").trim() || "related features";
-      return `🔧 Polymarket: scheduled maintenance on ${labelEn}, ${window}. May affect ${affect} during this window.`;
+      return `🔧 Polymarket: scheduled maintenance on ${subject}, ${window}. May affect ${affect} during this window.`;
     }
     case "maintenance_done":
-      return `✅ Polymarket: maintenance on ${labelEn} complete. Back to normal.`;
+      return `✅ Polymarket: maintenance on ${normalizeMaintenanceSubjectEn(labelEn)} complete. Back to normal.`;
     default:
       return `⚠️ Polymarket: ${labelEn} status update.${impactBit}`.trim();
   }
@@ -128,11 +136,13 @@ export function maintenanceBeijingWindow(maintenance) {
   if (!startHm) return null;
   const durationMin = Number(maintenance?.duration);
   if (!Number.isFinite(durationMin) || durationMin <= 0) {
-    return `北京时间 ${startHm}`;
+    return `Beijing time ${startHm}`;
   }
   const start = new Date(maintenance.start || maintenance.created_at);
   const endHm = formatBeijingHm(new Date(start.getTime() + durationMin * 60_000));
-  return endHm ? `北京时间 ${startHm}-${endHm}` : `北京时间 ${startHm}`;
+  return endHm
+    ? `Beijing time ${startHm}-${endHm}`
+    : `Beijing time ${startHm}`;
 }
 
 /** Map maintenance API status → ops English scenario */
