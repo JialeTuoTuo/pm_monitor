@@ -126,6 +126,42 @@ async function sendTelegram(env, text) {
   return body;
 }
 
+function payloadSummary(payload) {
+  const kinds = [];
+  if (payload?.incident) {
+    kinds.push({
+      kind: "incident",
+      id: payload.incident.id || null,
+      name: payload.incident.name || null,
+      status: payload.incident.status || null,
+    });
+  }
+  if (payload?.maintenance) {
+    kinds.push({
+      kind: "maintenance",
+      id: payload.maintenance.id || null,
+      name: payload.maintenance.name || null,
+      status: payload.maintenance.status || null,
+    });
+  }
+  if (payload?.component || payload?.component_update) {
+    kinds.push({
+      kind: "component",
+      id: payload.component?.id || payload.component_update?.component_id || null,
+      name: payload.component?.name || null,
+      status: payload.component_update?.new_status || payload.component?.status || null,
+    });
+  }
+  return {
+    topKeys: payload && typeof payload === "object" ? Object.keys(payload) : [],
+    events: kinds,
+  };
+}
+
+function logEvent(event, fields = {}) {
+  console.log(JSON.stringify({ ts: new Date().toISOString(), event, ...fields }));
+}
+
 function buildMessages(payload) {
   const when = formatNowTime();
   const pageUrl = payload?.page?.url || STATUS_PAGE_URL;
@@ -281,9 +317,11 @@ export default {
 
       if (request.method === "POST" && (url.pathname === "/webhook" || url.pathname === "/")) {
         if (!env.WEBHOOK_SECRET) {
+          logEvent("webhook.reject", { reason: "WEBHOOK_SECRET_missing", httpStatus: 503 });
           return new Response("WEBHOOK_SECRET not configured", { status: 503 });
         }
         if (!env.BOT_TOKEN || !env.CHAT_ID) {
+          logEvent("webhook.reject", { reason: "telegram_secrets_missing", httpStatus: 503 });
           return new Response("BOT_TOKEN/CHAT_ID not configured", { status: 503 });
         }
 
@@ -291,11 +329,18 @@ export default {
         try {
           payload = await request.json();
         } catch {
+          logEvent("webhook.reject", { reason: "invalid_json", httpStatus: 400 });
           return new Response("Invalid JSON", { status: 400 });
         }
 
         const signature = request.headers.get("x-instatus-webhook-signature");
+        const summary = payloadSummary(payload);
         if (!signature) {
+          logEvent("webhook.reject", {
+            reason: "signature_missing",
+            httpStatus: 400,
+            ...summary,
+          });
           return new Response("Signature missing", { status: 400 });
         }
 
@@ -305,21 +350,44 @@ export default {
           env.WEBHOOK_SECRET
         );
         if (!valid) {
+          logEvent("webhook.reject", {
+            reason: "invalid_signature",
+            httpStatus: 401,
+            hasSignature: true,
+            signatureLen: signature.trim().length,
+            ...summary,
+          });
           return new Response("Invalid signature", { status: 401 });
         }
 
         const messages = buildMessages(payload);
         if (messages.length === 0) {
+          logEvent("webhook.ok_no_forward", {
+            reason: "no_matching_event_fields",
+            httpStatus: 200,
+            forwarded: 0,
+            ...summary,
+          });
           return new Response(
             JSON.stringify({ ok: true, forwarded: 0, note: "no matching event fields" }),
             { headers: { "content-type": "application/json; charset=utf-8" } }
           );
         }
 
-        for (const text of messages) {
-          await sendTelegram(env, text);
+        for (let i = 0; i < messages.length; i++) {
+          await sendTelegram(env, messages[i]);
+          logEvent("webhook.telegram_sent", {
+            index: i + 1,
+            total: messages.length,
+            chars: messages[i].length,
+          });
         }
 
+        logEvent("webhook.ok", {
+          httpStatus: 200,
+          forwarded: messages.length,
+          ...summary,
+        });
         return new Response(JSON.stringify({ ok: true, forwarded: messages.length }), {
           headers: { "content-type": "application/json; charset=utf-8" },
         });
@@ -327,6 +395,10 @@ export default {
 
       return new Response("Not Found", { status: 404 });
     } catch (err) {
+      logEvent("webhook.error", {
+        httpStatus: 500,
+        message: err?.message || String(err),
+      });
       console.error("Unhandled error:", err?.stack || err?.message || String(err));
       return new Response(`Internal error: ${err?.message || String(err)}`, { status: 500 });
     }
