@@ -1,5 +1,5 @@
 {
-  "pageStatus": "HASISSUES",
+  "pageStatus": "UP",
   "components": [
     {
       "id": "cljg8dtbs161994brocgclobbt4",
@@ -40,13 +40,13 @@
     {
       "id": "cms5cp7240fp50zqq8n29aruo",
       "name": "Perpetuals trading",
-      "status": "MAJOROUTAGE",
+      "status": "OPERATIONAL",
       "group": "Perpetuals"
     },
     {
       "id": "cms5cpgbd0emv0zlrbpmy9hme",
       "name": "Perpetuals API",
-      "status": "MAJOROUTAGE",
+      "status": "OPERATIONAL",
       "group": "Perpetuals"
     },
     {
@@ -74,14 +74,16 @@
       "group": "Predictions"
     }
   ],
-  "incidents": [
+  "incidents": [],
+  "maintenances": [
     {
-      "id": "cmsn29mrk17gz0kn31kbqkz3x",
-      "name": "Issue with Perps Trading Engine",
-      "status": "INVESTIGATING",
-      "started": "2026-08-10T10:00:45.800Z"
+      "id": "cmsqidkxx02840znwyom4wg0k",
+      "name": "Scheduled Maintenance - Trading",
+      "status": "NOTSTARTEDYET",
+      "start": "2026-08-13T04:30:00.000Z",
+      "duration": 30,
+      "url": "https://status.polymarket.com/cmsqidkxx02840znwyom4wg0k"
     }
   ],
-  "maintenances": [],
-  "lastChecked": "2026-08-10T11:37:14.736Z"
+  "lastChecked": "2026-08-13T01:25:10.475Z"
 }
