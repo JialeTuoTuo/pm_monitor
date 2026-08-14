@@ -1,5 +1,5 @@
 {
-  "pageStatus": "UP",
+  "pageStatus": "HASISSUES",
   "components": [
     {
       "id": "cljg8dtbs161994brocgclobbt4",
@@ -22,7 +22,7 @@
     {
       "id": "cljg99p53207029broc36bdpn0h",
       "name": "Trading API (CLOB)",
-      "status": "OPERATIONAL",
+      "status": "DEGRADEDPERFORMANCE",
       "group": "Predictions"
     },
     {
@@ -74,7 +74,14 @@
       "group": "Predictions"
     }
   ],
-  "incidents": [],
+  "incidents": [
+    {
+      "id": "cmsti6tz60dbn0rqta5t09k8u",
+      "name": "Order placement and cancellations",
+      "status": "INVESTIGATING",
+      "started": "2026-08-14T22:13:06.265Z"
+    }
+  ],
   "maintenances": [],
-  "lastChecked": "2026-08-14T22:08:48.154Z"
+  "lastChecked": "2026-08-14T22:37:13.768Z"
 }
