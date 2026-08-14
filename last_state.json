@@ -22,7 +22,7 @@
     {
       "id": "cljg99p53207029broc36bdpn0h",
       "name": "Trading API (CLOB)",
-      "status": "DEGRADEDPERFORMANCE",
+      "status": "PARTIALOUTAGE",
       "group": "Predictions"
     },
     {
@@ -78,10 +78,10 @@
     {
       "id": "cmsti6tz60dbn0rqta5t09k8u",
       "name": "Order placement and cancellations",
-      "status": "INVESTIGATING",
+      "status": "MONITORING",
       "started": "2026-08-14T22:13:06.265Z"
     }
   ],
   "maintenances": [],
-  "lastChecked": "2026-08-14T22:56:05.347Z"
+  "lastChecked": "2026-08-14T23:15:59.837Z"
 }
